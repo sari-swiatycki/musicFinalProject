@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Checkbox, FormControlLabel, List, ListItem } from "@mui/material";
 import SearchBar from './SearchBar';
 import { RootStore, AppDispatch } from "../Stores/songStore"; // ייבוא AppDispatch
-import { addSongToPlaylist, fetchPlaylistSongs } from "../Slices/playlistSlice";
+import { addSongToPlaylist } from "../Slices/playlistSlice";
 
 interface SongListForPlaylistProps {
   playlistId: number;
@@ -11,14 +11,16 @@ interface SongListForPlaylistProps {
 }
 
 const SongListForPlaylist: React.FC<SongListForPlaylistProps> = ({ playlistId, onClose }) => {
+  console.log("playlistId",playlistId);
+  
   const dispatch = useDispatch<AppDispatch>(); // שינוי כאן
 
   const [selectedSongs, setSelectedSongs] = useState<number[]>([]);
   // const categoryId = useSelector((state: RootStore) => state.songs.categories[0]?.id);
 
-  useEffect(() => {
-    dispatch(fetchPlaylistSongs(playlistId));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchPlaylistSongs(playlistId));
+  // }, [dispatch]);
 
   const handleToggle = (songId: number) => () => {
     const currentIndex = selectedSongs.indexOf(songId);
